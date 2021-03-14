@@ -1,0 +1,42 @@
+<div class="py-5">
+    <div class="container">
+        <div>
+            <a href="http://clocker.in"><img class="img-fluid d-block rounded-circle mx-auto text-center"
+                    src="/img/banner.png" alt="Clocker.in"></a>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Please enter the email address associated with your account.<br></div>
+                    <div class="card-body">
+                        <form id="c_form-h" class="" action="/passwordreset" method="POST">
+                            <div class="form-group row">
+                                <label for="emailladdressid" class="col-3 col-form-label text-nowrap">Email Address or ID:</label>
+                                <div class="col-12">
+                                    <input type="text" name="usercontact" class="form-control"
+                                        placeholder="Email Address or ID" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary float-right">Request Password
+                                Reset</button>
+                        </form>
+                        <a href="/">Go back to login/dashboard</a>
+                        <br>
+                        {{#if notif}}
+                        <br>
+                        <div class="row col mt-2 text-center">
+                            <span class="text-success ">
+                                {{ notif }}
+                            </span>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

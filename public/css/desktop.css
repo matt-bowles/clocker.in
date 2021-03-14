@@ -1,0 +1,41 @@
+/* Wraps all 'entities' */
+#entity-container {
+    display: flex;
+    flex-wrap: wrap;    
+}
+
+/* An administrative entity (e.g. account, workplace, workgroup, shift, etc.) */
+.entity {
+    /* display: flexbox; */
+    width: 125px;
+    height: 125px;
+    border: solid black 1px;
+    margin: 5px;
+    background-color: gainsboro;
+}
+
+.entity img {
+    width: 50%;
+}
+
+.entity .edit {
+    float: left;
+}
+
+.entity .delete {
+    float: right;
+    top: 0;
+}
+
+/* WORKGROUP PAGES */
+.add, .remove {
+    cursor: pointer;
+}
+
+.add {
+    color: darkgreen;
+}
+
+.remove {
+    color: darkred;
+}

@@ -1,0 +1,33 @@
+{{!-- Display each workgroup that can be edited/deleted  --}}
+
+<h1>Workgroups</h1>
+
+{{> search-bar }}
+
+<div class="col" id="entityContainer" style="overflow-y: scroll; overflow-x: hidden; max-height: 600px;">
+
+    {{#each workgroups}}
+        <div class="row py-2 border-bottom">
+            <div class="col-1" style="color: #bdbdbd">
+                    <i class="fa fa-users fa-2x"></i>
+            </div>
+            <div class="col-8 searchable">
+                {{ this.name }}
+            </div>
+            <div class="col-1">
+                {{ this.numEmployees }} / {{ this.maxEmployees }}
+            </div>
+            <div class="col-1">
+                    <a href="/workgroups/{{ this.id }}" class="btn btn-info">View</a>
+            </div>
+        </div>
+    {{else}}
+        <h3 class="mt-3">There are no workgroups. Please create one</h3>    
+    {{/each}}
+
+
+
+    {{!-- Workgroups --}}
+
+</div>
+<a href="/workgroups/create" class="btn btn-primary float-right mt-3" style="margin-bottom: 1%;">Create New</a>

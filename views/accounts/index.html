@@ -1,0 +1,29 @@
+{{!-- Display each account that can be edited/delete  --}}
+
+
+<h1>Accounts</h1>
+
+{{> search-bar }}
+
+<div class="col" id="entityContainer" style="overflow-y: scroll; overflow-x: hidden; max-height: 600px;" >
+    
+    {{#each accounts}}
+        <div class="row py-2 border-bottom">
+            <div class="col-1" style="color: #bdbdbd">
+                <i class="fas fa-user fa-2x"></i>
+            </div>
+            <div class="col-9 searchable">
+                {{ this.firstName }} {{ this.lastName }}
+            </div>
+            <div class="col-1">
+                    <a href="/accounts/{{ this.id }}" class="btn btn-info">View</a>
+            </div>
+        </div>
+    {{/each}}
+
+
+
+    {{!-- New account --}}
+    
+</div>
+<a href="/accounts/create" class="btn btn-primary float-right mt-3" style="margin-bottom: 1%;">Create New</a>

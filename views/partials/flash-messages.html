@@ -1,0 +1,8 @@
+{{!-- {{@key}} = alert type --}}
+{{!-- {{this}} = alert msg  --}}
+
+{{#each messages}}
+<div class="alert alert-{{@key}} fade show" role="alert">
+    {{this}}
+</div>
+{{/each}}

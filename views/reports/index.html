@@ -1,0 +1,107 @@
+{{!-- Displays reports which can be created/modified/deleted  --}}
+
+<h1>Reports</h1>
+<head>
+    <title>Reports</title>
+</head>
+
+<p class="lead">This is the reports page. Please select a subject and delivery method.</p>
+
+<form action="/reports" method="POST">
+
+  <!-- Report type (employee or workgroup) -->
+  <input id="report_type" type="hidden" name="report_type">
+
+  <div class="form-group row">
+    <!-- Employees -->
+    <label class="col-2 col-form-label">Employee: </label>
+    <select id="empSelect" class="form-control col-3 mr-4" name="id" autocomplete="off">
+
+        <option value=""selected>[unselected]</option>
+        
+        <!-- Print out all available workplaces -->
+        {{#each employees}}
+            <option value="{{ this.id }}">{{ this.firstName }}  {{ this.lastName }}</option>
+        {{/each}}
+    </select>
+
+    <span class="my-2"><b>OR</b></span>
+
+    <!-- Workgroups -->
+    <label class="mx-4 col-form-label">Workgroup: </label>
+    <select id="wgSelect" class="form-control col-3 mr-5" autocomplete="off" name="id">
+
+        <option value="" selected>[unselected]</option>
+
+        <!-- Print out all available workplaces -->
+        {{#each this.workgroups}}
+            <option value="{{ this.id }}">{{ this.name }}</option>
+        {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group row">
+    <!-- Delivery method  -->
+      <label class="col-2 col-form-label">Delivery method: </label>
+      <select class="form-control col-2" name="delivery_method" required>
+        <option value="DIRECT_DOWNLOAD">Direct download</option>
+        <option value="EMAIL">Email</option>
+      </select>
+  </div>
+
+  <!-- Buttons -->
+  <div class="form-group row">
+    <a href="./" class="btn btn-secondary form-control col-3 mx-1">Back</a>
+    <button type="submit" id="submitBtn" class="btn btn-success form-control col-3 mx-1" disabled>Generate report</button>
+  </div>
+
+</form>
+
+<script>
+
+$(document).ready(function () {
+    empSelect = $('#empSelect');
+    wgSelect = $('#wgSelect');
+
+    // Incase data is pre-loaded
+    checkSelectElements();
+
+    // Assign events to select elements
+    $(empSelect).change(() => {
+        checkSelectElements();
+    });
+    $(wgSelect).change(() => {
+        checkSelectElements();
+    });
+});
+
+/**
+ * Enables and disables the select elements on the page.
+ * 
+ * E.g. if employee is selected, disable workplace selector, and vice versa.
+ */
+function checkSelectElements() {
+
+// Employee is selected, disable workgroup select
+if ($(empSelect).val() != "") {
+    $(wgSelect).attr("disabled", true);
+    $("#submitBtn").attr("disabled", false);
+    $('#report_type').val("EMPLOYEE");
+}
+
+// Workgroup is selected, disable employee select
+else if ($(wgSelect).val() != "") {
+    $(empSelect).attr("disabled", true);
+    $('#report_type').val("WORKGROUP");
+    $("#submitBtn").attr("disabled", false);
+}
+
+// Neither are selected, enable both
+else {
+    $(empSelect).attr("disabled", false);
+    $(wgSelect).attr("disabled", false);
+    $('#submitBtn').attr("disabled", true);
+}
+}
+
+</script>

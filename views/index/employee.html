@@ -1,0 +1,87 @@
+<h1 class="text-center">Welcome to Clocker.in</h1>
+<p class="lead">Welcome to the employee section of Clocker.in. From this page you are able to
+    clock-in/clock-out of assigned shifts.
+</p>
+
+<hr>
+<br>
+<br>
+<input id="clocked_into_shift" type="hidden"></input>
+
+<container class=" justify-content-center">
+
+    <table class="table table-striped table-hover">
+        <h4><b>Upcoming Shifts</b></h4>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Start</th>
+                <th scope="col">End</th>
+                <th scope="col">Location</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            {{#each this.shifts}}
+            <tr style="cursor: pointer;" class="shift_row" data-id="{{ this.id }}" data-start="{{ this.start }}"
+                data-end="{{ this.end }}"
+                data-status="{{#if this.clockout_time}}CLOCKED_OUT{{ else if this.clockin_time}}CLOCKED_IN{{ else }}READY{{/if}}"
+                data-workplace="{{ this.workplace }}" data-boundaries="{{ this.boundaries }}">
+
+                <td>{{formattime this.start }}</td>
+                <td>{{formattime this.end }}</td>
+                <td><a href="/workplaces/{{ this.workplace }}" target="_blank">{{ this.workplace_name }}</a></td>
+                <td class="status">
+                    {{#if this.clockout_time}}
+                    <span class="text-success"><
+                        Clocked out at {{formattime this.clockout_time }}
+                    </span>
+                    {{ else if this.clockin_time}}
+                    <span class="text-info">
+                        Clocked in at {{formattime this.clockin_time }}
+                    </span>
+                    {{ else }}
+                    Ready
+                    {{/if}}
+                </td>
+                <td><input type="radio" autocomplete="off"></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <br>
+
+    <div class="row float-right mr-1">
+        <form action="/clock" method="POST" id="form">
+            <input type="hidden" name="id" value="{{ this.employee.id }}">
+            <input type="hidden" name="clocked_in" id="clocked_in" value="false">
+            <input type="hidden" name="current_shift" id="current_shift" value="">
+
+            <button type="button" class="btn btn-primary" id="clockBtn" onclick="clock()" autocomplete="off"
+                disabled>Clock-in</button>
+        </form>
+    </div>
+    <a href="/myshifts">View upcoming shifts</a>
+    <br>
+    <br>
+    <hr>
+
+
+</container>
+
+
+{{!-- Employee JS file --}}
+<script type="text/javascript" src="/js/employee-dashboard.js"></script>
+
+{{!-- Flash messages JS file --}}
+<script type="text/javascript" src="/js/flash-message-handler.js"></script>
+
+{{!-- JQuery form Ajax --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+    integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+    crossorigin="anonymous"></script>
+
+{{!-- Used to convert YYYYDDMMHHmm to unix timestamps --}}
+<script src="https://momentjs.com/downloads/moment.js"></script>

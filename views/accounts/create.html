@@ -1,0 +1,60 @@
+
+
+<h1>Accounts - Create</h1>
+
+<!-- Account Details-->
+<div class="col mt-3">
+  <form action="/accounts" method="POST">
+      <!-- First name -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">First Name</label>
+        <input type="text" class="form-control col-6 mr-5" name="firstName" placeholder="First name" required maxlength="20">
+      </div>
+
+      <!-- Last name -->
+      <div class="form-group row">
+        <label  class="col-3 col-form-label">Last Name</label>
+        <input type="text" class="form-control col-6 mr-5" name="lastName" placeholder="Last name" required maxlength="20">
+      </div>
+
+      <!-- Role  -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Role</label>
+        <select class="form-control col-6 mr-5" name="role">
+          <option value="EMPLOYEE" selected>Employee</option>
+          <option value="PAYROLL_MANAGER">Payroll Manager</option>
+          <option value="ADMINISTRATOR">Administrator</option>
+        </select>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group row">
+        <label  class="col-3 col-form-label">Email</label>
+        <input type="email" class="form-control col-6 mr-5" name="email" placeholder="Email address" maxlength="50">
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group row">
+        <label  class="col-3 col-form-label">Phone number</label>
+        <input type="tel" class="form-control col-6 mr-5" name="phone" placeholder="Phone number (optional)" maxlength="15">
+      </div>
+
+      <!-- Preferred contact method -->
+      <div class="form-group row">
+          <label class="col-3 col-form-label">Contact method</label>
+          <select class="form-control col-6 mr-5" name="contactMethod">
+            <option selected value="EMAIL">Email</option>
+            <option selected value="PHONE">Phone</option>
+          </select>
+      </div>
+
+      <hr>
+
+      <!-- Buttons -->
+      <div class="form-group row">
+        <a href="./" class="btn btn-secondary form-control col-3 mx-1">Back</a>
+        <button type="reset" class="btn btn-danger form-control col-3 mx-1">Reset</button>
+        <button type="submit" class="btn btn-success form-control col-3 mx-1">Save</button>
+      </div>
+  </form>
+</div>

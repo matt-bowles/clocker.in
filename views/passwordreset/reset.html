@@ -1,0 +1,58 @@
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Request password reset</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Enter a new password<br></div>
+                    <div class="card-body">
+                        <form id="c_form-h" class="" action="/passwordreset/reset" method="POST">
+
+                            <div class="form-group row">
+                                <label for="passwordid" class="col-2 col-form-label">Password</label>
+                                <div class="col-10">
+                                    <input type="password" name="password" class="form-control" id="password"
+                                        placeholder="Password" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="passwordresetid" class="col-2 col-form-label">Repeat Password</label>
+                                <div class="col-10">
+                                    <input type="password" class="form-control" id="confirmpassword"
+                                        placeholder="Password" required>
+                                </div>
+                            </div>
+
+                            {{!-- Account ID, for which the password is being updated --}}
+                            <input type="hidden" name="id" value="{{ this.id }}">
+
+                            <button type="submit" id="submitBtn" class="btn btn-outline-primary btn-block"
+                                disabled>Reset Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#confirmpassword').blur(() => {
+        if ($('#confirmpassword').val() !== $('#password').val()) {
+            createFlashMessage("Passwords do not match", "danger");
+            $('#submitBtn').attr("disabled", true);
+        } else {
+            $("#submitBtn").attr("disabled", false);
+        }
+    })
+</script>

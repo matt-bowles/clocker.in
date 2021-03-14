@@ -1,0 +1,70 @@
+<container class="justify-content-center" id="myshifts-container">
+
+    <table class="table table-striped table-hover">
+        <h4><b>My shifts</b></h4>
+            <thead class="thead-dark">
+                <tr class="col-4 text-center">
+                    <th colspan="4">
+                        <div class="row">
+                            <div class="col text-right">
+                                <i class="fas fa-arrow-alt-circle-left fa-lg weekBtn" onclick="getShifts(-1)"></i>
+                            </div>
+                            <div class="col-4" id="dateRange">
+                                <span>Loading...</span>
+                            </div>
+                            <div class="col text-left">
+                                <i class="fas fa-arrow-alt-circle-right fa-lg weekBtn" onclick="getShifts(+1)"></i>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+
+    <tbody id="shiftsList">
+        {{#each this.shifts}}   
+            <tr style="cursor: pointer;" class="shift_row" 
+                data-id="{{ this.id }}"
+                data-start="{{ this.start }}"
+                data-end="{{ this.end }}"
+                data-status="{{#if this.clockout_time}}CLOCKED_OUT{{ else if this.clockin_time}}CLOCKED_IN{{ else }}READY{{/if}}"
+                data-workplace="{{ this.workplace }}"
+                data-boundaries="{{ this.boundaries }}">
+
+                <td>{{ this.start }}</td>
+                <td>{{ this.end }}</td>
+                <td>{{ this.workplace_name }}</td>
+                <td class="status">
+                    {{#if this.clockout_time}} 
+                        Clocked out at {{ this.clockout_time }}
+                    {{ else if this.clockin_time}} 
+                        Clocked in at {{ this.clockin_time }}
+                    {{ else }} 
+                        Ready
+                    {{/if}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+</container>
+
+<style>
+    .weekBtn:hover {
+        cursor: pointer;
+        color: gainsboro;
+    }
+</style>
+
+{{!-- Used to convert YYYYDDMMHHmm to unix timestamps --}}
+<script src="https://momentjs.com/downloads/moment.js"></script>
+
+{{!-- JQuery form Ajax --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+
+{{!-- The JavaScript file which handles this page's logic --}}
+<script src="js/myshifts.js"></script>

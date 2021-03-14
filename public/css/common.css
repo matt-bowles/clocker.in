@@ -1,0 +1,19 @@
+/* 
+ * The styles in this file apply to the login/desktop/mobile layouts.
+ * Ideal for setting theme colours, etc.
+ */
+
+/* Flash messages */
+.alert {
+    position: absolute;
+    min-width: 50%;
+    width: auto;
+    top: 15px;
+    left: 25%;
+}
+
+#workgroup-manager-container > div {
+    text-align: center;
+    height: 250px;
+    overflow: scroll;
+}

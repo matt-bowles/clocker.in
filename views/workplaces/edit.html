@@ -1,0 +1,62 @@
+<h1>Edit Workplace {{ name }}</h1>
+<form action="/workplaces/{{ this.wp.id }}" method="POST">
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group row">
+                <label for="workplace-name" class="col-3 col-form-label" maxlength="30">Name</label>
+                <input type="text" name="name" class="form-control col-8" id="workplace-name" placeholder="Name" value="{{ this.wp.name }}" required>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group row">
+                <label for="workplace-description" class="col-2 col-form-label" maxlength="50">Description</label>
+                <input type="text" name="description" class="form-control col-9" id="workplace-description"
+                    placeholder="Description (optional)" value="{{ this.wp.description }}">
+            </div>
+        </div>
+
+        <div class="col-1">
+            <div class="form-group row">
+                <input type="hidden" name="boundaries" id="boundaries-input" value="{{ this.wp.boundaries }}" required>
+                <button type="submit" class="btn btn-success form-control" id="saveBtn">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="map" style="width: 100%; height: 160%;"></div>
+
+<div class="mt-3">
+    <a class="btn btn-secondary form-control col-1 mx-1" href="/workplaces/">Back</a>
+    <a class="btn btn-danger form-control col-1 mx-1" href="/workplaces/{{wp.id}}/delete">Delete</a>
+</div>
+
+<!--Map Integration-->
+{{!-- Leaflet CSS --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+
+{{!-- Leaflet core --}}
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
+
+{{!-- Leaflet Draw --}}
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+
+{{!-- Leaflet Edit --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-editable/1.2.0/Leaflet.Editable.min.js"></script>
+
+<script src="https://leaflet.github.io/Path.Drag.js/src/Path.Drag.js"></script>
+
+{{!-- Leaflet Geocoder --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+{{!-- Scripts to be imported for the workplace page --}}
+<script src="/js/workplace-editor.js"></script>
+
+<script src="/js/flash-message-handler.js"></script>

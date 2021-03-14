@@ -1,0 +1,49 @@
+<script src="/js/form-editor.js"></script>
+<script src="/js/workgroup-manager.js"></script>
+<script src="/js/flash-message-handler.js"></script>
+
+
+
+<h1>Workgroup - Create</h1>
+
+<div class="container mt-3">
+  <form method="POST" action="/workgroups">
+
+      <div class="form-group row">
+        <div class="col"><label>Workgroup Name:</label></div>
+        <div class="col"><label>Workgroup Description:</label></div>
+        <div class="col"><label></label>Num/max employees:</label></div>
+
+        <div class="w-100"></div>
+
+        <!-- Workgroup name -->
+        <div class="col">
+            <input type="text" class="form-control" name="name" placeholder="Name" required maxlength="30" placeholder="Name"> 
+        </div>
+
+        <!-- Workgroup description -->
+        <div class="col">
+            <input type="text" class="form-control" name="description" placeholder="Description" maxlength="50" placeholder="Description (optional)">
+        </div>
+
+        <!-- Num employees / Workgroup max size -->
+        <div class="col">
+            <b><span id="numEmployees">0</span> / </b> 
+            <input id="maxEmployees" type="number" class="form col-5" name="maxEmployees" value="99" min="1" required>
+        </div>
+      </div>
+
+      <input type="hidden" id="empsInWorkgroup" name="empsInWorkgroup" autocomplete="off" value="">
+
+    {{>workgroup-manager }}
+
+      <hr>
+
+      <!-- Buttons -->
+      <div class="form-group row">
+        <a href="./" class="btn btn-secondary form-control col-2 mx-1">Back</a>
+        <button type="reset" id="resetBtn" class="btn btn-danger form-control col-2 mx-1">Reset</button>
+        <button type="submit" id="saveBtn" class="btn btn-success form-control col-2 mx-1" disabled>Save</button>
+      </div>
+  </form>
+</div>

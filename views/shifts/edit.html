@@ -1,0 +1,100 @@
+<h1>Shifts - Edit</h1>
+
+<!-- Account Details -->
+<div class="col mt-3">
+    <form action="/shifts/{{ shift.id }}" method="POST">
+        
+        <div class="form-group row">
+            <!-- Start/end time -->
+            <label class="col-2 col-form-label">Shift times: </label>
+
+            <!-- Start time -->
+            <div class="input-group date col-3" id="start_dtpicker" data-target-input="nearest" style="padding-left: 0;">
+                <input type="text" class="form-control datetimepicker-input" data-target="#start_dtpicker" name="start" value="{{ this.shift.start }}" required/>
+                <div class="input-group-append" data-target="#start_dtpicker" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+
+            <span class="mx-2 font-weight-bold"> – </span> 
+
+            <!-- End time -->
+            <div class="input-group date col-3" id="end_dtpicker" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#end_dtpicker" name="end" value="{{ this.shift.end }}" required/>
+                <div class="input-group-append" data-target="#end_dtpicker" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Workplace  -->
+      <div class="form-group row">
+
+            <label class="col-2 col-form-label">Workplace: </label>
+            <select class="form-control col-6 mr-5" name="workplace">
+
+                <!-- Print out all available workplaces -->
+                {{#each this.wps}}
+                    <option value="{{ this.id }}" {{#ifEquals ../this.shift.workplace this.id }} selected {{/ifEquals}}>{{ this.name }}  </option>
+                {{/each}}
+    
+            </select>
+        </div>
+
+        <div class="form-group row">
+
+            <!-- Employees -->
+            <label class="col-2 col-form-label">Employee: </label>
+            <select id="empSelect" class="form-control col-3 mr-4" name="employee" autocomplete="off">
+
+                <option value="">[unselected]</option>
+                
+                <!-- Print out all available employees -->
+                {{#each this.emps}}
+                    <option value="{{ this.id }}" {{#ifEquals ../this.shift.employee this.id}} selected {{/ifEquals}}>{{ this.firstName }}  {{ this.lastName }}</option>
+                {{/each}}
+            </select>
+
+            <span class="my-2"><b>OR</b></span>
+
+            <!-- Workgroups -->
+            <label class="col-2 col-form-label">Workgroup: </label>
+            <select id="wgSelect" class="form-control col-3 mr-5" name="workgroup" autocomplete="off">
+
+                <option value="">[unselected]</option>
+
+                <!-- Print out all available workgroups -->
+                {{#each this.wgs}}
+                    <option value="{{ this.id }}" {{#ifEquals ../this.shift.workgroup this.id}} selected {{/ifEquals}}>{{ this.name }}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <hr>
+
+        <!-- Buttons -->
+        <div class="form-group row">
+            <a href="./" class="btn btn-secondary form-control col-3 mx-1">Back</a>
+            <a class="btn btn-danger form-control col-3 mx-1" href="/shifts/{{shift.id}}/delete">Delete</a>
+            <button type="submit" id="saveBtn" class="btn btn-success form-control col-3 mx-1">Save</button>
+            
+        </div>
+    </form>
+</div>
+
+<!-- Validation js -->
+<script type="text/javascript" src="/js/shifts-validation.js"></script>
+
+<script type="text/javascript" src="/js/flash-message.handler.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+<!-- Set-up the date/time pickers -->
+<script type="text/javascript">
+    $(function () {
+        $('#start_dtpicker').datetimepicker({ locale: 'en-au' });
+        $('#end_dtpicker').datetimepicker({ locale: 'en-au' });
+    });
+</script>

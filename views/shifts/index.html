@@ -1,0 +1,33 @@
+{{!-- Display each shift that can be edited/deleted  --}}
+
+
+<h1>Shifts</h1>
+<div class="col" style="overflow-y: scroll; overflow-x: hidden; max-height: 600px;">
+    
+    {{#each shifts}}
+        <div class="row py-2 border-bottom">
+            <div class="col-1" style="color: #bdbdbd">
+                <i class="fa fa-clock-o fa-2x"></i>
+            </div>
+            <div class="col-6">
+                {{formattime this.start }} - {{formattime this.end }}
+            </div>
+
+            {{!-- What the shift is assigned to --}}
+            <div class="col-3">
+                <a href="/workplaces/{{ this.Workplace.id }}">{{ this.Workplace.name }}</a>
+            </div>
+
+            <div class="col-1">
+                    <a href="/shifts/{{ this.id }}" class="btn btn-info">View</a>
+            </div>
+        </div>
+    {{else}}
+        <h3 class="mt-3">There are no shifts. Please create one</h3>    
+    {{/each}}
+    
+</div>
+
+{{!-- Create shift --}}
+{{!-- If the user is coming to view shifts for emp/wg, then change link to create shift for that subject --}}
+<a href= {{#if emp}} "/accounts/{{ emp }}/shifts/create" {{else if wg}} "/workgroups/{{ wg }}/shifts/create" {{else}}"/shifts/create" {{/if}}  class="btn btn-primary float-right mt-3" style="margin-bottom: 1%;">Create New</a>

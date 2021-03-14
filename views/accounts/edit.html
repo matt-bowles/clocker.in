@@ -1,0 +1,79 @@
+<script src="/js/form-editor.js"></script>
+
+<h1>Accounts - View</h1>
+
+<div class="col mt-3">
+  <form method="POST" action="/accounts/{{ this.acc.id }}">
+      <!-- ID -->
+      <div class="form-group row">
+          <label class="col-3 col-form-label">Account ID</label>
+          <input type="text" class="form-control col-6 mr-5" name="id" value="{{ this.acc.id }}" readonly>
+      </div>
+
+      <!-- First name -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">First name</label>
+        <input type="text" class="form-control col-6 mr-5" name="firstName" placeholder="First name" value="{{ this.acc.firstName }}" maxlength="20" readonly>
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
+
+      <!-- Last name -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Last name</label>
+        <input type="text" class="form-control col-6 mr-5" name="lastName" placeholder="Last name" value="{{ this.acc.lastName }}" maxlength="20" readonly>
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
+
+      <!-- Role  -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Role</label>
+        <select class="form-control col-6 mr-5" name="role">
+          <option {{#ifEquals this.acc.role "EMPLOYEE"}} selected {{/ifEquals}} value="EMPLOYEE">Employee</option>
+          <option {{#ifEquals this.acc.role "PAYROLL_MANAGER"}} selected {{/ifEquals}} value="PAYROLL_MANAGER">Payroll Manager</option>
+          <option {{#ifEquals this.acc.role "ADMINISTRATOR"}} selected {{/ifEquals}} value="ADMINISTRATOR">Administrator</option>
+        </select>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Email</label>
+        <input type="email" class="form-control col-6 mr-5" name="email" value="{{ this.acc.email }}" placeholder="Email address" maxlength="50" readonly>
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Phone number</label>
+        <input type="tel" class="form-control col-6 mr-5" name="phone" value="{{ this.acc.phone }}" placeholder="Phone number (optional)"  maxlength="15" readonly>
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
+
+      <!-- Preferred contact method -->
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Contact method</label>
+        <select class="form-control col-6 mr-5" name="contactMethod">
+          <option {{#ifEquals this.acc.contactMethod "EMAIL"}} selected {{/ifEquals}} value="EMAIL">Email</option>
+          <option {{#ifEquals this.acc.contactMethod "PHONE"}} selected {{/ifEquals}} value="PHONE">Phone</option>
+        </select>
+      </div>
+
+      <div class="form-group row">
+        <a class="col-3 col-form-label" href="../passwordreset/">Reset password here</a class="col-3 col-form-label">
+      </div>
+
+      <hr>
+
+      <!-- Buttons -->
+      <div class="form-group row">
+          <a href="./" class="btn btn-secondary form-control col-2 mx-1">Back</a>
+          <a class="btn btn-danger form-control col-2 mx-1" href="/accounts/{{this.acc.id}}/delete" onclick="alert(); return createModal()">Delete</a>
+
+          {{!-- Only show "view shifts" button if the account belongs to an employee --}}
+          {{#ifEquals acc.role "EMPLOYEE"}}
+            <a class="btn btn-primary form-control col-2 mx-1" href="/accounts/{{../this.acc.id}}/shifts">View Shifts</a>
+          {{/ifEquals}}
+
+          <button type="submit" class=" btn btn-success form-control col-2 mx-1">Save</button>
+      </div>
+  </form>
+</div>

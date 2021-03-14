@@ -1,0 +1,45 @@
+<table class="table table-bordered">
+    <tr>
+        <!-- Not in workgroup -->
+        <td>
+            <table class="table-plain w-100  table-hover table-striped">
+                <thead class="thead-dark">
+                    <th>Not in Workgroup</th>
+                </thead>
+                <tbody id="notInWg">         
+                    {{#each this.emps}}
+                        {{#ifEquals this.in_workgroup "false" }}
+                        <tr style="cursor: pointer" data-id="{{ ../this.id }}" onclick="add($(this))">
+                            <td>
+                                <span>{{ ../this.first_name }} {{ ../this.last_name }}</span>
+                                <span class="add float-right">+</span>
+                            </td>
+                        </tr>
+                        {{/ifEquals}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </td>
+
+        <!-- In workgroup -->
+        <td>
+            <table class="table-plain w-100 table-striped">
+                <thead class="thead-dark">
+                    <th>In Workgroup</th>
+                </thead>
+                <tbody id="inWg">         
+                    {{#each this.emps}}
+                        {{#ifEquals this.in_workgroup "true" }}
+                            <tr style="cursor: pointer" data-id="{{ ../this.id }}" onclick="remove($(this))">
+                                <td>
+                                    <span>{{ ../this.first_name }} {{ ../this.last_name }}</span>
+                                    <span class="remove float-right">-</span>
+                                </td>
+                            </tr>
+                        {{/ifEquals}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
